@@ -70,6 +70,12 @@ class SelectorButton extends StatelessWidget {
             key: Key(TestHelper.DropdownButtonKeyValue),
             padding: EdgeInsets.zero,
             minWidth: 0,
+            color: selectorConfig.selectorButtonBackgroundColor,
+            elevation: 0,
+            highlightElevation: 0,
+            focusElevation: 0,
+            hoverElevation: 0,
+            disabledElevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
                 selectorConfig.selectorButtonBorderRadius,
