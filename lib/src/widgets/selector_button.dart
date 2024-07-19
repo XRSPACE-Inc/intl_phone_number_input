@@ -70,7 +70,6 @@ class SelectorButton extends StatelessWidget {
             key: Key(TestHelper.DropdownButtonKeyValue),
             padding: EdgeInsets.zero,
             minWidth: 0,
-            height: double.infinity,
             onPressed: countries.isNotEmpty && countries.length > 1 && isEnabled
                 ? () async {
                     Country? selected;
@@ -160,7 +159,9 @@ class SelectorButton extends StatelessWidget {
       backgroundColor: Colors.transparent,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(selectorConfig.bottomSheetBorderRadius), topRight: Radius.circular(selectorConfig.bottomSheetBorderRadius))),
+              topLeft: Radius.circular(selectorConfig.bottomSheetBorderRadius),
+              topRight:
+                  Radius.circular(selectorConfig.bottomSheetBorderRadius))),
       useSafeArea: selectorConfig.useBottomSheetSafeArea,
       builder: (BuildContext context) {
         return Stack(children: [
