@@ -48,6 +48,9 @@ class SelectorConfig {
   /// Customize the height for selector
   final double selectorItemHeight;
 
+  /// Customize the text padding for selector
+  final EdgeInsets selectorItemTextPadding;
+
   /// Customize the box-decoration for selector
   final BoxDecoration? selectorItemDecoration;
 
@@ -66,6 +69,7 @@ class SelectorConfig {
     this.arrowDownIcon,
     this.selectorButtonBackgroundColor = Colors.transparent,
     this.selectorButtonBorderRadius = 0.0,
+    this.selectorItemTextPadding = const EdgeInsets.symmetric(horizontal: 12),
     this.selectorItemHeight = 48.0,
     this.selectorItemDecoration,
     this.bottomSheetBorderRadius = 30.0,

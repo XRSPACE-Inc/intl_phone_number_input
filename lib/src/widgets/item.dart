@@ -13,6 +13,7 @@ class Item extends StatelessWidget {
   final bool trailingSpace;
   final Widget? arrowDownIcon;
   final double selectorButtonHeight;
+  final EdgeInsets selectorItemTextPadding;
   final BoxDecoration? selectorDecoration;
 
   const Item({
@@ -26,6 +27,7 @@ class Item extends StatelessWidget {
     this.trailingSpace = true,
     this.arrowDownIcon,
     this.selectorButtonHeight = 48,
+    this.selectorItemTextPadding = const EdgeInsets.symmetric(horizontal: 12),
     this.selectorDecoration,
   }) : super(key: key);
 
@@ -48,11 +50,13 @@ class Item extends StatelessWidget {
             showFlag: showFlag,
             useEmoji: useEmoji,
           ),
-          SizedBox(width: 12.0),
-          Text(
-            '$dialCode',
-            textDirection: TextDirection.ltr,
-            style: textStyle,
+          Padding(
+            padding: selectorItemTextPadding,
+            child: Text(
+              '$dialCode',
+              textDirection: TextDirection.ltr,
+              style: textStyle,
+            ),
           ),
           ...[
             arrowDownIcon ??
