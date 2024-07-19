@@ -39,11 +39,17 @@ class SelectorConfig {
   /// Add arrow down for select box
   final Widget? arrowDownIcon;
 
+  /// Customize the selector button background color
+  final Color selectorButtonBackgroundColor;
+
+  /// Customize the selector button border radius
+  final double selectorButtonBorderRadius;
+
   /// Customize the height for selector
-  final double selectorButtonHeight;
+  final double selectorItemHeight;
 
   /// Customize the box-decoration for selector
-  final BoxDecoration? selectorDecoration;
+  final BoxDecoration? selectorItemDecoration;
 
   /// Customize the bottom sheet border radius
   final double bottomSheetBorderRadius;
@@ -58,8 +64,10 @@ class SelectorConfig {
     this.trailingSpace = true,
     this.useBottomSheetSafeArea = false,
     this.arrowDownIcon,
-    this.selectorButtonHeight = 48.0,
-    this.selectorDecoration,
+    this.selectorButtonBackgroundColor = Colors.transparent,
+    this.selectorButtonBorderRadius = 0.0,
+    this.selectorItemHeight = 48.0,
+    this.selectorItemDecoration,
     this.bottomSheetBorderRadius = 30.0,
   });
 }

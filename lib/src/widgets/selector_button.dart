@@ -49,7 +49,7 @@ class SelectorButton extends StatelessWidget {
                     trailingSpace: selectorConfig.trailingSpace,
                     textStyle: selectorTextStyle,
                     arrowDownIcon: selectorConfig.arrowDownIcon,
-                    selectorDecoration: selectorConfig.selectorDecoration,
+                    selectorDecoration: selectorConfig.selectorItemDecoration,
                   ),
                   value: country,
                   items: mapCountryToDropdownItem(countries),
@@ -64,12 +64,18 @@ class SelectorButton extends StatelessWidget {
                 trailingSpace: selectorConfig.trailingSpace,
                 textStyle: selectorTextStyle,
                 arrowDownIcon: selectorConfig.arrowDownIcon,
-                selectorDecoration: selectorConfig.selectorDecoration,
+                selectorDecoration: selectorConfig.selectorItemDecoration,
               )
         : MaterialButton(
             key: Key(TestHelper.DropdownButtonKeyValue),
             padding: EdgeInsets.zero,
             minWidth: 0,
+            color: selectorConfig.selectorButtonBackgroundColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                selectorConfig.selectorButtonBorderRadius,
+              ),
+            ),
             onPressed: countries.isNotEmpty && countries.length > 1 && isEnabled
                 ? () async {
                     Country? selected;
@@ -97,8 +103,8 @@ class SelectorButton extends StatelessWidget {
                 trailingSpace: selectorConfig.trailingSpace,
                 textStyle: selectorTextStyle,
                 arrowDownIcon: selectorConfig.arrowDownIcon,
-                selectorButtonHeight: selectorConfig.selectorButtonHeight,
-                selectorDecoration: selectorConfig.selectorDecoration,
+                selectorButtonHeight: selectorConfig.selectorItemHeight,
+                selectorDecoration: selectorConfig.selectorItemDecoration,
               ),
             ),
           );
@@ -119,7 +125,7 @@ class SelectorButton extends StatelessWidget {
           withCountryNames: false,
           trailingSpace: selectorConfig.trailingSpace,
           arrowDownIcon: selectorConfig.arrowDownIcon,
-          selectorDecoration: selectorConfig.selectorDecoration,
+          selectorDecoration: selectorConfig.selectorItemDecoration,
         ),
       );
     }).toList();
