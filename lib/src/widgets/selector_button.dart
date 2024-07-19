@@ -48,7 +48,10 @@ class SelectorButton extends StatelessWidget {
                     leadingPadding: selectorConfig.leadingPadding,
                     trailingSpace: selectorConfig.trailingSpace,
                     textStyle: selectorTextStyle,
+                    selectorItemTextPadding:
+                        selectorConfig.selectorItemTextPadding,
                     arrowDownIcon: selectorConfig.arrowDownIcon,
+                    selectorButtonHeight: selectorConfig.selectorItemHeight,
                     selectorDecoration: selectorConfig.selectorItemDecoration,
                   ),
                   value: country,
@@ -65,6 +68,7 @@ class SelectorButton extends StatelessWidget {
                 textStyle: selectorTextStyle,
                 selectorItemTextPadding: selectorConfig.selectorItemTextPadding,
                 arrowDownIcon: selectorConfig.arrowDownIcon,
+                selectorButtonHeight: selectorConfig.selectorItemHeight,
                 selectorDecoration: selectorConfig.selectorItemDecoration,
               )
         : MaterialButton(
@@ -108,6 +112,7 @@ class SelectorButton extends StatelessWidget {
                 leadingPadding: selectorConfig.leadingPadding,
                 trailingSpace: selectorConfig.trailingSpace,
                 textStyle: selectorTextStyle,
+                selectorItemTextPadding: selectorConfig.selectorItemTextPadding,
                 arrowDownIcon: selectorConfig.arrowDownIcon,
                 selectorButtonHeight: selectorConfig.selectorItemHeight,
                 selectorDecoration: selectorConfig.selectorItemDecoration,
@@ -130,7 +135,9 @@ class SelectorButton extends StatelessWidget {
           textStyle: selectorTextStyle,
           withCountryNames: false,
           trailingSpace: selectorConfig.trailingSpace,
+          selectorItemTextPadding: selectorConfig.selectorItemTextPadding,
           arrowDownIcon: selectorConfig.arrowDownIcon,
+          selectorButtonHeight: selectorConfig.selectorItemHeight,
           selectorDecoration: selectorConfig.selectorItemDecoration,
         ),
       );
