@@ -42,6 +42,9 @@ class SelectorConfig {
   /// Customize the box-decoration for selector
   final BoxDecoration? selectorDecoration;
 
+  /// Customize the bottom sheet border radius
+  final double bottomSheetBorderRadius;
+
   const SelectorConfig({
     this.selectorType = PhoneInputSelectorType.DROPDOWN,
     this.showFlags = true,
@@ -53,5 +56,6 @@ class SelectorConfig {
     this.useBottomSheetSafeArea = false,
     this.arrowDownIcon,
     this.selectorDecoration,
+    this.bottomSheetBorderRadius = 30.0,
   });
 }
