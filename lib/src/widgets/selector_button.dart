@@ -176,12 +176,6 @@ class SelectorButton extends StatelessWidget {
       context: inheritedContext,
       clipBehavior: Clip.hardEdge,
       isScrollControlled: isScrollControlled,
-      backgroundColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(selectorConfig.bottomSheetBorderRadius),
-              topRight:
-                  Radius.circular(selectorConfig.bottomSheetBorderRadius))),
       useSafeArea: selectorConfig.useBottomSheetSafeArea,
       builder: (BuildContext context) {
         return Stack(children: [
