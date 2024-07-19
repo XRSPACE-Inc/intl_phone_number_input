@@ -34,7 +34,7 @@ class Item extends StatelessWidget {
       dialCode = dialCode.padRight(5, "   ");
     }
     return Container(
-      height: double.infinity,
+      height: 48,
       decoration: selectorDecoration,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
