@@ -34,33 +34,34 @@ class Item extends StatelessWidget {
       dialCode = dialCode.padRight(5, "   ");
     }
     return Container(
-      height: 48,
       decoration: selectorDecoration,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SizedBox(width: leadingPadding),
-          _Flag(
-            country: country,
-            showFlag: showFlag,
-            useEmoji: useEmoji,
-          ),
-          SizedBox(width: 12.0),
-          Text(
-            '$dialCode',
-            textDirection: TextDirection.ltr,
-            style: textStyle,
-          ),
-          ...[
-            arrowDownIcon ??
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.black,
-                  size: 20,
-                ),
+      child: Expanded(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox(width: leadingPadding),
+            _Flag(
+              country: country,
+              showFlag: showFlag,
+              useEmoji: useEmoji,
+            ),
+            SizedBox(width: 12.0),
+            Text(
+              '$dialCode',
+              textDirection: TextDirection.ltr,
+              style: textStyle,
+            ),
+            ...[
+              arrowDownIcon ??
+                  Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black,
+                    size: 20,
+                  ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
