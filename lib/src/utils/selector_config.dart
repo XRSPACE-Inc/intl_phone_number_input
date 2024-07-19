@@ -39,6 +39,9 @@ class SelectorConfig {
   /// Add arrow down for select box
   final Widget? arrowDownIcon;
 
+  /// Customize the height for selector
+  final double selectorButtonHeight;
+
   /// Customize the box-decoration for selector
   final BoxDecoration? selectorDecoration;
 
@@ -55,6 +58,7 @@ class SelectorConfig {
     this.trailingSpace = true,
     this.useBottomSheetSafeArea = false,
     this.arrowDownIcon,
+    this.selectorButtonHeight = 48.0,
     this.selectorDecoration,
     this.bottomSheetBorderRadius = 30.0,
   });

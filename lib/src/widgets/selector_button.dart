@@ -97,6 +97,7 @@ class SelectorButton extends StatelessWidget {
                 trailingSpace: selectorConfig.trailingSpace,
                 textStyle: selectorTextStyle,
                 arrowDownIcon: selectorConfig.arrowDownIcon,
+                selectorButtonHeight: selectorConfig.selectorButtonHeight,
                 selectorDecoration: selectorConfig.selectorDecoration,
               ),
             ),

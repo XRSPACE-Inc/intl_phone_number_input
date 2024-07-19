@@ -12,6 +12,7 @@ class Item extends StatelessWidget {
   final double? leadingPadding;
   final bool trailingSpace;
   final Widget? arrowDownIcon;
+  final double selectorButtonHeight;
   final BoxDecoration? selectorDecoration;
 
   const Item({
@@ -24,6 +25,7 @@ class Item extends StatelessWidget {
     this.leadingPadding = 12,
     this.trailingSpace = true,
     this.arrowDownIcon,
+    this.selectorButtonHeight = 48,
     this.selectorDecoration,
   }) : super(key: key);
 
@@ -34,34 +36,33 @@ class Item extends StatelessWidget {
       dialCode = dialCode.padRight(5, "   ");
     }
     return Container(
+      height: selectorButtonHeight,
       decoration: selectorDecoration,
-      child: Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            SizedBox(width: leadingPadding),
-            _Flag(
-              country: country,
-              showFlag: showFlag,
-              useEmoji: useEmoji,
-            ),
-            SizedBox(width: 12.0),
-            Text(
-              '$dialCode',
-              textDirection: TextDirection.ltr,
-              style: textStyle,
-            ),
-            ...[
-              arrowDownIcon ??
-                  Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.black,
-                    size: 20,
-                  ),
-            ],
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          SizedBox(width: leadingPadding),
+          _Flag(
+            country: country,
+            showFlag: showFlag,
+            useEmoji: useEmoji,
+          ),
+          SizedBox(width: 12.0),
+          Text(
+            '$dialCode',
+            textDirection: TextDirection.ltr,
+            style: textStyle,
+          ),
+          ...[
+            arrowDownIcon ??
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black,
+                  size: 20,
+                ),
           ],
-        ),
+        ],
       ),
     );
   }
