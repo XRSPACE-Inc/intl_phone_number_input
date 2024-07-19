@@ -70,6 +70,7 @@ class SelectorButton extends StatelessWidget {
             key: Key(TestHelper.DropdownButtonKeyValue),
             padding: EdgeInsets.zero,
             minWidth: 0,
+            height: double.infinity,
             onPressed: countries.isNotEmpty && countries.length > 1 && isEnabled
                 ? () async {
                     Country? selected;
