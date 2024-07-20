@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl_phone_number_input/src/models/country_list.dart';
 import 'package:intl_phone_number_input/src/models/country_model.dart';
 import 'package:intl_phone_number_input/src/providers/country_provider.dart';
@@ -133,6 +134,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
 
 class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   TextEditingController? controller;
+  late final FocusNode focusNode;
   double selectorButtonBottomPadding = 0;
 
   Country? country;
@@ -144,6 +146,8 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
     super.initState();
     loadCountries();
     controller = widget.textFieldController ?? TextEditingController();
+    focusNode = widget.focusNode ?? FocusNode();
+
     initialiseWidget();
   }
 
@@ -152,6 +156,14 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
     if (this.mounted) {
       super.setState(fn);
     }
+  }
+
+  @override
+  void dispose() {
+    focusNode.unfocus();
+    focusNode.dispose();
+    controller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -424,7 +436,7 @@ class _InputWidgetView
               textDirection: TextDirection.ltr,
               controller: state.controller,
               cursorColor: widget.cursorColor,
-              focusNode: widget.focusNode,
+              focusNode: state.focusNode,
               enabled: widget.isEnabled,
               autofocus: widget.autoFocus,
               keyboardType: widget.keyboardType,
@@ -440,6 +452,7 @@ class _InputWidgetView
               validator: widget.validator ?? state.validator,
               onSaved: state.onSaved,
               scrollPadding: widget.scrollPadding,
+              onTapOutside: (event) => state.focusNode.unfocus(),
               inputFormatters: [
                 LengthLimitingTextInputFormatter(widget.maxLength),
                 widget.formatInput
