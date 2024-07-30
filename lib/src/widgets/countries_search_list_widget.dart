@@ -57,7 +57,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
 
   Widget getIndicator() {
     return SizedBox(
-      height: 25.0,
+      height: 30.0,
       width: double.infinity,
       child: Center(
         child: SizedBox(
@@ -83,7 +83,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
       children: <Widget>[
         getIndicator(),
         Padding(
-          padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+          padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
           child: TextFormField(
             key: Key(TestHelper.CountrySearchInputKeyValue),
             decoration: getSearchBoxDecoration(),
