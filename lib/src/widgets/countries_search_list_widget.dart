@@ -55,11 +55,33 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
         InputDecoration(labelText: 'Search by country name or dial code');
   }
 
+  Widget getIndicator() {
+    return SizedBox(
+      height: 25.0,
+      width: double.infinity,
+      child: Center(
+        child: SizedBox(
+          height: 4.0,
+          width: 31.25,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(204, 204, 204, 1),
+              borderRadius: BorderRadius.all(
+                Radius.circular(2.0),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        getIndicator(),
         Padding(
           padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
           child: TextFormField(
