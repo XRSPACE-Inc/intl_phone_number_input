@@ -103,7 +103,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
         ),
         Flexible(
           child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
             controller: widget.scrollController,
             shrinkWrap: true,
             itemCount: filteredCountries.length,
