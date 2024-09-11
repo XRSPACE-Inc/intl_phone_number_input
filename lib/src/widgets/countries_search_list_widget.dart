@@ -12,6 +12,8 @@ class CountrySearchListWidget extends StatefulWidget {
   final bool autoFocus;
   final bool? showFlags;
   final bool? useEmoji;
+  final TextStyle? styleCountryTitle;
+  final TextStyle? styleCountrySubtitle;
 
   CountrySearchListWidget(
     this.countries,
@@ -21,6 +23,8 @@ class CountrySearchListWidget extends StatefulWidget {
     this.showFlags,
     this.useEmoji,
     this.autoFocus = false,
+    this.styleCountryTitle,
+    this.styleCountrySubtitle,
   });
 
   @override
@@ -55,13 +59,35 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
         InputDecoration(labelText: 'Search by country name or dial code');
   }
 
+  Widget getIndicator() {
+    return SizedBox(
+      height: 30.0,
+      width: double.infinity,
+      child: Center(
+        child: SizedBox(
+          height: 4.0,
+          width: 31.25,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(204, 204, 204, 1),
+              borderRadius: BorderRadius.all(
+                Radius.circular(2.0),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        getIndicator(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
           child: TextFormField(
             key: Key(TestHelper.CountrySearchInputKeyValue),
             decoration: getSearchBoxDecoration(),
@@ -81,6 +107,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
         ),
         Flexible(
           child: ListView.builder(
+            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
             controller: widget.scrollController,
             shrinkWrap: true,
             itemCount: filteredCountries.length,
@@ -92,6 +119,8 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
                 locale: widget.locale,
                 showFlags: widget.showFlags!,
                 useEmoji: widget.useEmoji!,
+                styleCountryTitle: widget.styleCountryTitle,
+                styleCountrySubtitle: widget.styleCountrySubtitle,
               );
               // return ListTile(
               //   key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
@@ -136,6 +165,8 @@ class DirectionalCountryListTile extends StatelessWidget {
   final String? locale;
   final bool showFlags;
   final bool useEmoji;
+  final TextStyle? styleCountryTitle;
+  final TextStyle? styleCountrySubtitle;
 
   const DirectionalCountryListTile({
     Key? key,
@@ -143,6 +174,8 @@ class DirectionalCountryListTile extends StatelessWidget {
     required this.locale,
     required this.showFlags,
     required this.useEmoji,
+    this.styleCountryTitle,
+    this.styleCountrySubtitle,
   }) : super(key: key);
 
   @override
@@ -156,6 +189,7 @@ class DirectionalCountryListTile extends StatelessWidget {
           '${Utils.getCountryName(country, locale)}',
           textDirection: Directionality.of(context),
           textAlign: TextAlign.start,
+          style: styleCountryTitle,
         ),
       ),
       subtitle: Align(
@@ -164,6 +198,7 @@ class DirectionalCountryListTile extends StatelessWidget {
           '${country.dialCode ?? ''}',
           textDirection: TextDirection.ltr,
           textAlign: TextAlign.start,
+          style: styleCountrySubtitle,
         ),
       ),
       onTap: () => Navigator.of(context).pop(country),
