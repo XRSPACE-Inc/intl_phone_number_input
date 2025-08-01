@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl_phone_number_input/src/models/country_list.dart';
 import 'package:intl_phone_number_input/src/models/country_model.dart';
 import 'package:intl_phone_number_input/src/providers/country_provider.dart';
@@ -13,6 +12,7 @@ import 'package:intl_phone_number_input/src/utils/selector_config.dart';
 import 'package:intl_phone_number_input/src/utils/test/test_helper.dart';
 import 'package:intl_phone_number_input/src/utils/util.dart';
 import 'package:intl_phone_number_input/src/utils/widget_view.dart';
+import 'package:intl_phone_number_input/src/widgets/countries_search_list_widget.dart';
 import 'package:intl_phone_number_input/src/widgets/selector_button.dart';
 
 /// Enum for [SelectorButton] types.
@@ -21,7 +21,7 @@ import 'package:intl_phone_number_input/src/widgets/selector_button.dart';
 ///   * [PhoneInputSelectorType.DROPDOWN]
 ///   * [PhoneInputSelectorType.BOTTOM_SHEET]
 ///   * [PhoneInputSelectorType.DIALOG]
-enum PhoneInputSelectorType { DROPDOWN, BOTTOM_SHEET, DIALOG }
+enum PhoneInputSelectorType { DROPDOWN, BOTTOM_SHEET, DIALOG, CUSTOM }
 
 /// A [TextFormField] for [InternationalPhoneNumberInput].
 ///
@@ -88,6 +88,8 @@ class InternationalPhoneNumberInput extends StatefulWidget {
   final List<String>? countries;
   final TextStyle? styleCountryTitle;
   final TextStyle? styleCountrySubtitle;
+  final Future<Country?> Function(CountrySearchListWidget)?
+      onCustomPhoneInputSelectorInvoked;
 
   InternationalPhoneNumberInput({
     Key? key,
@@ -130,6 +132,7 @@ class InternationalPhoneNumberInput extends StatefulWidget {
     this.countries,
     this.styleCountryTitle,
     this.styleCountrySubtitle,
+    this.onCustomPhoneInputSelectorInvoked,
   }) : super(key: key);
 
   @override
@@ -430,6 +433,8 @@ class _InputWidgetView
                   isScrollControlled: widget.countrySelectorScrollControlled,
                   styleCountryTitle: widget.styleCountryTitle,
                   styleCountrySubtitle: widget.styleCountrySubtitle,
+                  onCustomPhoneInputSelectorInvoked:
+                      widget.onCustomPhoneInputSelectorInvoked,
                 ),
                 SizedBox(
                   height: state.selectorButtonBottomPadding,

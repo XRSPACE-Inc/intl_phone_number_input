@@ -21,6 +21,8 @@ class SelectorButton extends StatelessWidget {
   final TextStyle? styleCountrySubtitle;
 
   final ValueChanged<Country?> onCountryChanged;
+  final Future<Country?> Function(CountrySearchListWidget)?
+      onCustomPhoneInputSelectorInvoked;
 
   const SelectorButton({
     Key? key,
@@ -36,6 +38,7 @@ class SelectorButton extends StatelessWidget {
     required this.isScrollControlled,
     this.styleCountryTitle,
     this.styleCountrySubtitle,
+    this.onCustomPhoneInputSelectorInvoked,
   }) : super(key: key);
 
   @override
@@ -92,15 +95,18 @@ class SelectorButton extends StatelessWidget {
             ),
             onPressed: countries.isNotEmpty && countries.length > 1 && isEnabled
                 ? () async {
-                    Country? selected;
-                    if (selectorConfig.selectorType ==
-                        PhoneInputSelectorType.BOTTOM_SHEET) {
-                      selected = await showCountrySelectorBottomSheet(
-                          context, countries);
-                    } else {
-                      selected =
-                          await showCountrySelectorDialog(context, countries);
-                    }
+                    Country? selected = switch (selectorConfig.selectorType) {
+                      PhoneInputSelectorType.DIALOG =>
+                        await showCountrySelectorDialog(
+                            context, countries, selectorConfig),
+                      PhoneInputSelectorType.BOTTOM_SHEET =>
+                        await showCountrySelectorBottomSheet(
+                            context, countries, selectorConfig),
+                      PhoneInputSelectorType.CUSTOM =>
+                        await showCountrySelectorCustom(
+                            countries, selectorConfig),
+                      _ => null,
+                    };
 
                     if (selected != null) {
                       onCountryChanged(selected);
@@ -149,18 +155,22 @@ class SelectorButton extends StatelessWidget {
   }
 
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.DIALOG] is selected
-  Future<Country?> showCountrySelectorDialog(
-      BuildContext inheritedContext, List<Country> countries) {
+  Future<Country?> showCountrySelectorDialog(BuildContext inheritedContext,
+      List<Country> countries, SelectorConfig config) {
     return showDialog(
       context: inheritedContext,
       barrierDismissible: true,
       builder: (BuildContext context) => AlertDialog(
+        insetPadding: config.dialogInsetPadding,
+        contentPadding: config.dialogContentPadding,
         content: Directionality(
           textDirection: Directionality.of(inheritedContext),
           child: Container(
+            color: Colors.white,
             width: double.maxFinite,
             child: CountrySearchListWidget(
               countries,
+              config,
               locale,
               searchBoxDecoration: searchBoxDecoration,
               showFlags: selectorConfig.showFlags,
@@ -176,8 +186,8 @@ class SelectorButton extends StatelessWidget {
   }
 
   /// shows a Dialog with list [countries] if the [PhoneInputSelectorType.BOTTOM_SHEET] is selected
-  Future<Country?> showCountrySelectorBottomSheet(
-      BuildContext inheritedContext, List<Country> countries) {
+  Future<Country?> showCountrySelectorBottomSheet(BuildContext inheritedContext,
+      List<Country> countries, SelectorConfig config) {
     return showModalBottomSheet(
       context: inheritedContext,
       isScrollControlled: isScrollControlled,
@@ -197,7 +207,7 @@ class SelectorButton extends StatelessWidget {
                   textDirection: Directionality.of(inheritedContext),
                   child: Container(
                     decoration: ShapeDecoration(
-                      color: Theme.of(context).canvasColor,
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(
@@ -209,6 +219,7 @@ class SelectorButton extends StatelessWidget {
                     ),
                     child: CountrySearchListWidget(
                       countries,
+                      config,
                       locale,
                       searchBoxDecoration: searchBoxDecoration,
                       scrollController: controller,
@@ -225,6 +236,25 @@ class SelectorButton extends StatelessWidget {
           ),
         ]);
       },
+    );
+  }
+
+  Future<Country?>? showCountrySelectorCustom(
+    List<Country> countries,
+    SelectorConfig config,
+  ) {
+    return onCustomPhoneInputSelectorInvoked?.call(
+      CountrySearchListWidget(
+        countries,
+        config,
+        locale,
+        searchBoxDecoration: searchBoxDecoration,
+        showFlags: selectorConfig.showFlags,
+        useEmoji: selectorConfig.useEmoji,
+        autoFocus: autoFocusSearchField,
+        styleCountryTitle: styleCountryTitle,
+        styleCountrySubtitle: styleCountrySubtitle,
+      ),
     );
   }
 }

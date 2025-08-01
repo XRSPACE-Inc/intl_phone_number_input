@@ -57,6 +57,11 @@ class SelectorConfig {
   /// Customize the bottom sheet border radius
   final double bottomSheetBorderRadius;
 
+  final EdgeInsets? dialogInsetPadding;
+  final EdgeInsets? dialogContentPadding;
+  final EdgeInsets? listInputPadding;
+  final EdgeInsets? listTilePadding;
+
   const SelectorConfig({
     this.selectorType = PhoneInputSelectorType.DROPDOWN,
     this.showFlags = true,
@@ -73,5 +78,9 @@ class SelectorConfig {
     this.selectorItemHeight = 48.0,
     this.selectorItemDecoration,
     this.bottomSheetBorderRadius = 30.0,
+    this.dialogInsetPadding,
+    this.dialogContentPadding,
+    this.listInputPadding,
+    this.listTilePadding,
   });
 }

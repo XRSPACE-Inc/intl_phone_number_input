@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/src/models/country_model.dart';
 import 'package:intl_phone_number_input/src/utils/test/test_helper.dart';
 import 'package:intl_phone_number_input/src/utils/util.dart';
+import 'package:intl_phone_number_input/src/utils/selector_config.dart';
 
 /// Creates a list of Countries with a search textfield.
 class CountrySearchListWidget extends StatefulWidget {
@@ -14,9 +15,11 @@ class CountrySearchListWidget extends StatefulWidget {
   final bool? useEmoji;
   final TextStyle? styleCountryTitle;
   final TextStyle? styleCountrySubtitle;
+  final SelectorConfig config;
 
   CountrySearchListWidget(
     this.countries,
+    this.config,
     this.locale, {
     this.searchBoxDecoration,
     this.scrollController,
@@ -59,35 +62,13 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
         InputDecoration(labelText: 'Search by country name or dial code');
   }
 
-  Widget getIndicator() {
-    return SizedBox(
-      height: 30.0,
-      width: double.infinity,
-      child: Center(
-        child: SizedBox(
-          height: 4.0,
-          width: 31.25,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(204, 204, 204, 1),
-              borderRadius: BorderRadius.all(
-                Radius.circular(2.0),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        getIndicator(),
         Padding(
-          padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+          padding: widget.config.listInputPadding ?? EdgeInsets.zero,
           child: TextFormField(
             key: Key(TestHelper.CountrySearchInputKeyValue),
             decoration: getSearchBoxDecoration(),
@@ -107,7 +88,7 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
         ),
         Flexible(
           child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            padding: widget.config.listTilePadding ?? EdgeInsets.zero,
             controller: widget.scrollController,
             shrinkWrap: true,
             itemCount: filteredCountries.length,
@@ -122,29 +103,6 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
                 styleCountryTitle: widget.styleCountryTitle,
                 styleCountrySubtitle: widget.styleCountrySubtitle,
               );
-              // return ListTile(
-              //   key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
-              //   leading: widget.showFlags!
-              //       ? _Flag(country: country, useEmoji: widget.useEmoji)
-              //       : null,
-              //   title: Align(
-              //     alignment: AlignmentDirectional.centerStart,
-              //     child: Text(
-              //       '${Utils.getCountryName(country, widget.locale)}',
-              //       textDirection: Directionality.of(context),
-              //       textAlign: TextAlign.start,
-              //     ),
-              //   ),
-              //   subtitle: Align(
-              //     alignment: AlignmentDirectional.centerStart,
-              //     child: Text(
-              //       '${country.dialCode ?? ''}',
-              //       textDirection: TextDirection.ltr,
-              //       textAlign: TextAlign.start,
-              //     ),
-              //   ),
-              //   onTap: () => Navigator.of(context).pop(country),
-              // );
             },
           ),
         ),
